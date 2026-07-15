@@ -8,35 +8,27 @@
 </head>
 <body class="bg-slate-950 text-slate-200">
     <div class="max-w-4xl mx-auto p-6">
-        <h1 class="text-5xl font-bold text-center mb-2 text-emerald-400">Truman's Arrowhead Pointe Classic</h1>
-
-        <!-- Tabs including Map -->
-        <div class="flex gap-2 border-b border-slate-700 mb-8 overflow-x-auto">
-            <!-- ... other tabs ... -->
-            <button onclick="showTab(6)" class="tab px-6 py-3 text-slate-400">Map</button>
-        </div>
-
-        <!-- Map Tab with Images -->
-        <div id="tab6" class="tab-content hidden">
-            <h2 class="text-2xl mb-6">Course Map - Hole Selection</h2>
+        <div id="tabMap" class="tab-content">
+            <h2 class="text-2xl mb-6">Full Course Map - 18 Holes</h2>
             <select onchange="showHole(this.value)" class="w-full bg-slate-800 p-4 rounded-2xl mb-6">
-                <option value="1">Hole 1 - Par 4</option>
-                <option value="18">Hole 18 - Par 4</option>
+                <option value="1">Hole 1 - Par 4 - Blue 410 yds</option>
+                <option value="2">Hole 2 - Par 5 - Blue 520 yds</option>
+                <!-- ... all 18 ... -->
+                <option value="18">Hole 18 - Par 4 - Longest Drive</option>
             </select>
-            <div id="holeDetails" class="bg-slate-900 p-6 rounded-3xl text-center"></div>
+            <div id="holeDetails" class="bg-slate-900 p-6 rounded-3xl"></div>
         </div>
     </div>
 
     <script>
-        function showTab(n) { /* ... */ }
+        const holes = {
+            1: "Par 4 - Blue 410 yds - White 380 yds",
+            18: "Par 4 - Longest Drive Contest"
+            // Add all 18 here
+        };
         function showHole(hole) {
-            const details = document.getElementById('holeDetails');
-            details.innerHTML = `
-                <img src="https://via.placeholder.com/600x300/166534/ffffff?text=Hole+${hole}" class="rounded-2xl mx-auto" alt="Hole ${hole}">
-                <p class="mt-4">Par 4 - 410 yards</p>
-            `;
+            document.getElementById('holeDetails').innerHTML = `<p>Hole ${hole}: ${holes[hole] || 'Details coming'}</p>`;
         }
-        showTab(0);
     </script>
 </body>
 </html>
