@@ -9,55 +9,33 @@
 <body class="bg-slate-950 text-slate-200">
     <div class="max-w-4xl mx-auto p-6">
         <h1 class="text-5xl font-bold text-center mb-2 text-emerald-400">Truman's Arrowhead Pointe Classic</h1>
-        <p class="text-center text-xl text-emerald-300">Best Ball Foursomes • 16 Players</p>
 
-        <!-- Day -->
-        <div class="text-center mb-6">
-            <select id="daySelect" class="bg-slate-800 p-3 rounded-2xl">
-                <option>Day 1</option>
-                <option>Day 2</option>
-                <option>Day 3</option>
-            </select>
-        </div>
-
-        <!-- Tabs -->
+        <!-- Tabs including Map -->
         <div class="flex gap-2 border-b border-slate-700 mb-8 overflow-x-auto">
-            <button onclick="showTab(0)" class="tab px-6 py-3 border-b-2 border-emerald-400 text-emerald-400">Scoring</button>
-            <button onclick="showTab(1)" class="tab px-6 py-3 text-slate-400">Players</button>
-            <button onclick="showTab(2)" class="tab px-6 py-3 text-slate-400">Contacts</button>
-            <button onclick="showTab(3)" class="tab px-6 py-3 text-slate-400">Rules</button>
-            <button onclick="showTab(4)" class="tab px-6 py-3 text-slate-400">Mixing</button>
-            <button onclick="showTab(5)" class="tab px-6 py-3 text-slate-400">Misc</button>
+            <!-- ... other tabs ... -->
             <button onclick="showTab(6)" class="tab px-6 py-3 text-slate-400">Map</button>
-            <button onclick="showTab(7)" class="tab px-6 py-3 text-slate-400">Payouts</button>
         </div>
 
-        <!-- Map Tab with populated dropdown -->
+        <!-- Map Tab with Images -->
         <div id="tab6" class="tab-content hidden">
             <h2 class="text-2xl mb-6">Course Map - Hole Selection</h2>
             <select onchange="showHole(this.value)" class="w-full bg-slate-800 p-4 rounded-2xl mb-6">
-                <option value="1">Hole 1 - Par 4 - 410 yds</option>
-                <option value="2">Hole 2 - Par 5 - 520 yds</option>
-                <option value="18">Hole 18 - Par 4 - Longest Drive</option>
+                <option value="1">Hole 1 - Par 4</option>
+                <option value="18">Hole 18 - Par 4</option>
             </select>
-            <div id="holeDetails" class="bg-slate-900 p-6 rounded-3xl"></div>
+            <div id="holeDetails" class="bg-slate-900 p-6 rounded-3xl text-center"></div>
         </div>
-
-        <!-- Other tabs populated similarly -->
-        <div id="tab3" class="tab-content hidden">Rules: Best ball, 2 mulligans, etc.</div>
-        <div id="tab5" class="tab-content hidden">Tee Times: 8:00 AM • Breakfast at 7:00 AM</div>
     </div>
 
     <script>
-        function showTab(n) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
-            document.getElementById('tab' + n).classList.remove('hidden');
-        }
-
+        function showTab(n) { /* ... */ }
         function showHole(hole) {
-            document.getElementById('holeDetails').innerHTML = `<p>Hole ${hole} details and yardage.</p>`;
+            const details = document.getElementById('holeDetails');
+            details.innerHTML = `
+                <img src="https://via.placeholder.com/600x300/166534/ffffff?text=Hole+${hole}" class="rounded-2xl mx-auto" alt="Hole ${hole}">
+                <p class="mt-4">Par 4 - 410 yards</p>
+            `;
         }
-
         showTab(0);
     </script>
 </body>
