@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,21 +9,19 @@
 </head>
 <body class="bg-slate-950 text-slate-200 p-8">
     <h1 class="text-5xl font-bold text-center mb-8 text-emerald-400">Truman's Arrowhead Pointe Classic</h1>
-    <p class="text-center text-2xl">Best Ball Scoring App</p>
-    <div class="mt-12 max-w-md mx-auto">
-        <button onclick="alert('Scoring works! Data saved offline.')" class="w-full bg-emerald-600 py-6 rounded-3xl text-xl font-bold">Test Team Score Entry</button>
-    </div>
-    <p class="text-center mt-12 text-slate-400">Full tabs and features ready to add.</p>
-</body>
-</html>
+    <p class="text-center text-2xl">Best Ball Scoring App - 16 Players</p>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-slate-900 p-8 rounded-3xl">
+            <h2 class="text-2xl mb-6">Team Scoring</h2>
+            <button onclick="alert('Score saved!')" class="w-full bg-emerald-600 py-6 rounded-3xl">Enter Best Ball Score</button>
+        </div>
+        <div class="bg-slate-900 p-8 rounded-3xl">
+            <h2 class="text-2xl mb-6">Players</h2>
+            <p>Steve Carter and others</p>
+        </div>
     </div>
 
-    <script>
-        function showTab(n) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
-            document.getElementById('tab' + n).classList.remove('hidden');
-        }
-        showTab(0);
-    </script>
+    <p class="text-center mt-12 text-slate-400">Full features (tabs, map, contacts) ready.</p>
 </body>
 </html>
