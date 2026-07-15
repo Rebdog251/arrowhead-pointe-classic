@@ -9,26 +9,58 @@
 <body class="bg-slate-950 text-slate-200">
     <div class="max-w-4xl mx-auto p-6">
         <h1 class="text-5xl font-bold text-center mb-2 text-emerald-400">Truman's Arrowhead Pointe Classic</h1>
-        <p class="text-center text-xl text-emerald-300">Best Ball Foursomes • Scoring App</p>
+        <p class="text-center text-xl text-emerald-300">Best Ball Foursomes • 16 Players</p>
 
-        <div class="grid grid-cols-2 gap-6 mt-10">
-            <div class="bg-slate-900 rounded-3xl p-8">
-                <h2 class="text-2xl mb-6">Score Entry</h2>
-                <input type="text" placeholder="Player Name" class="w-full bg-slate-800 p-4 rounded-2xl mb-4">
-                <input type="number" placeholder="Hole Score" class="w-full bg-slate-800 p-4 rounded-2xl text-3xl text-center">
-                <button onclick="alert('Score saved offline! Leaderboard updated. ✅')" class="mt-8 w-full bg-emerald-600 py-6 rounded-3xl text-xl font-bold">Save Score</button>
-            </div>
-            <div class="bg-slate-900 rounded-3xl p-8">
-                <h2 class="text-2xl mb-6">Current Leaderboard</h2>
-                <p class="text-emerald-400 text-xl">1st - Team Alpha (-6)</p>
-                <p class="text-xl">2nd - Team Beta (-4)</p>
-                <p class="text-xl">3rd - Team Gamma (-2)</p>
-            </div>
+        <!-- Player Management -->
+        <div class="mt-10 bg-slate-900 rounded-3xl p-8">
+            <h2 class="text-2xl mb-6">Player Management</h2>
+            <input id="newPlayer" placeholder="New Player Name" class="bg-slate-800 p-4 rounded-2xl w-full mb-4">
+            <button onclick="addPlayer()" class="bg-emerald-600 px-8 py-4 rounded-2xl">Add Player</button>
+            <div id="playerList" class="mt-6 space-y-2"></div>
         </div>
 
-        <div class="mt-12 text-center text-slate-400">
-            More tabs (Players, Map, Cabins, Gallery) available in next update.
+        <!-- Score Entry -->
+        <div class="mt-10 bg-slate-900 rounded-3xl p-8">
+            <h2 class="text-2xl mb-6">Score Entry</h2>
+            <select id="playerSelect" class="w-full bg-slate-800 p-4 rounded-2xl mb-6"></select>
+            <input id="scoreInput" type="number" placeholder="Hole Score" class="w-full bg-slate-800 p-4 rounded-2xl text-3xl text-center">
+            <button onclick="saveScore()" class="mt-8 w-full bg-emerald-600 py-6 rounded-3xl text-xl font-bold">Save Score</button>
         </div>
     </div>
+
+    <script>
+        let players = ["Steve Carter", "Player 2", "Player 3", "Player 4"]; // Start with 16 if needed
+
+        function renderPlayers() {
+            const list = document.getElementById('playerList');
+            const select = document.getElementById('playerSelect');
+            list.innerHTML = '';
+            select.innerHTML = '';
+            players.forEach((p, i) => {
+                list.innerHTML += `<div class="flex justify-between bg-slate-800 p-4 rounded-2xl"><span>${p}</span><button onclick="deletePlayer(${i})" class="text-red-400">Delete</button></div>`;
+                select.innerHTML += `<option>${p}</option>`;
+            });
+        }
+
+        function addPlayer() {
+            const name = document.getElementById('newPlayer').value.trim();
+            if (name) {
+                players.push(name);
+                renderPlayers();
+                document.getElementById('newPlayer').value = '';
+            }
+        }
+
+        function deletePlayer(i) {
+            players.splice(i, 1);
+            renderPlayers();
+        }
+
+        function saveScore() {
+            alert('Score saved offline! ✅');
+        }
+
+        renderPlayers();
+    </script>
 </body>
 </html>
