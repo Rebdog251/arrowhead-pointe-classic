@@ -9,31 +9,36 @@
 <body class="bg-slate-950 text-slate-200">
     <div class="max-w-4xl mx-auto p-6">
         <h1 class="text-5xl font-bold text-center mb-2 text-emerald-400">Truman's Arrowhead Pointe Classic</h1>
-        <p class="text-center text-xl text-emerald-300">Best Ball Foursomes • Team Scoring</p>
+        <p class="text-center text-xl text-emerald-300">Best Ball Foursomes • 16 Players</p>
 
         <!-- Tabs -->
-        <div class="flex gap-2 border-b border-slate-700 mb-8 overflow-x-auto pb-1">
-            <button onclick="showTab(0)" class="tab px-6 py-3 border-b-2 border-emerald-400 text-emerald-400 font-medium">Scoring</button>
+        <div class="flex gap-2 border-b border-slate-700 mb-8 overflow-x-auto">
+            <button onclick="showTab(0)" class="tab px-6 py-3 border-b-2 border-emerald-400 text-emerald-400">Scoring</button>
             <button onclick="showTab(1)" class="tab px-6 py-3 text-slate-400">Players</button>
-            <button onclick="showTab(2)" class="tab px-6 py-3 text-slate-400">Leaderboards</button>
-            <button onclick="showTab(3)" class="tab px-6 py-3 text-slate-400">Map</button>
+            <button onclick="showTab(2)" class="tab px-6 py-3 text-slate-400">Contacts</button>
+            <button onclick="showTab(3)" class="tab px-6 py-3 text-slate-400">Rules</button>
+            <button onclick="showTab(4)" class="tab px-6 py-3 text-slate-400">Mixing</button>
+            <button onclick="showTab(5)" class="tab px-6 py-3 text-slate-400">Misc</button>
+            <button onclick="showTab(6)" class="tab px-6 py-3 text-slate-400">Course</button>
+            <button onclick="showTab(7)" class="tab px-6 py-3 text-slate-400">Payouts</button>
         </div>
 
-        <!-- Scoring Tab (Team Best Ball) -->
+        <!-- Scoring -->
         <div id="tab0" class="tab-content">
-            <h2 class="text-2xl mb-6">Team Score Entry</h2>
-            <select id="teamSelect" class="w-full bg-slate-800 p-4 rounded-2xl mb-6">
-                <option>Team Alpha</option>
-                <option>Team Beta</option>
-            </select>
-            <input id="holeScore" type="number" placeholder="Best Ball Score for Hole" class="w-full bg-slate-800 p-4 rounded-2xl text-3xl text-center">
-            <button onclick="saveTeamScore()" class="mt-8 w-full bg-emerald-600 py-6 rounded-3xl text-xl font-bold">Save Team Score</button>
+            <h2 class="text-2xl mb-6">Team Best Ball Scoring</h2>
+            <select id="team" class="w-full bg-slate-800 p-4 rounded-2xl mb-6"></select>
+            <input id="score" type="number" placeholder="Team Score for Hole" class="w-full bg-slate-800 p-4 rounded-2xl text-3xl text-center">
+            <button onclick="saveScore()" class="mt-8 w-full bg-emerald-600 py-6 rounded-3xl text-xl font-bold">Save Team Score</button>
         </div>
 
-        <!-- Other Tabs -->
-        <div id="tab1" class="tab-content hidden">Player Management (add names here)</div>
-        <div id="tab2" class="tab-content hidden">Live Team Leaderboards</div>
-        <div id="tab3" class="tab-content hidden">Course Map</div>
+        <!-- Other tabs with placeholders for brevity -->
+        <div id="tab1" class="tab-content hidden">Player Management</div>
+        <div id="tab2" class="tab-content hidden">Contacts List</div>
+        <div id="tab3" class="tab-content hidden">Tournament Rules</div>
+        <div id="tab4" class="tab-content hidden">Foursome Mixing Tool</div>
+        <div id="tab5" class="tab-content hidden">Tee Times & Meals</div>
+        <div id="tab6" class="tab-content hidden">Course Layout</div>
+        <div id="tab7" class="tab-content hidden">Payout Distribution ($320/day)</div>
     </div>
 
     <script>
@@ -43,8 +48,8 @@
         }
         showTab(0);
 
-        function saveTeamScore() {
-            alert('Team best ball score saved offline! ✅ Leaderboard updated.');
+        function saveScore() {
+            alert('Team score saved! ✅');
         }
     </script>
 </body>
