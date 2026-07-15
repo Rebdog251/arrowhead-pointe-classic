@@ -9,7 +9,7 @@
 <body class="bg-slate-950 text-slate-200">
     <div class="max-w-4xl mx-auto p-6">
         <h1 class="text-5xl font-bold text-center mb-2 text-emerald-400">Truman's Arrowhead Pointe Classic</h1>
-        <p class="text-center text-xl text-emerald-300">Best Ball Foursomes • 16 Players</p>
+        <p class="text-center text-xl text-emerald-300">Best Ball Foursomes • Team Scoring</p>
 
         <!-- Tabs -->
         <div class="flex gap-2 border-b border-slate-700 mb-8 overflow-x-auto">
@@ -26,31 +26,65 @@
         <!-- Scoring -->
         <div id="tab0" class="tab-content">
             <h2 class="text-2xl mb-6">Team Best Ball Scoring</h2>
-            <select id="team" class="w-full bg-slate-800 p-4 rounded-2xl mb-6"></select>
-            <input id="score" type="number" placeholder="Team Score for Hole" class="w-full bg-slate-800 p-4 rounded-2xl text-3xl text-center">
-            <button onclick="saveScore()" class="mt-8 w-full bg-emerald-600 py-6 rounded-3xl text-xl font-bold">Save Team Score</button>
+            <select id="teamSelect" class="w-full bg-slate-800 p-4 rounded-2xl mb-6"></select>
+            <input id="holeScore" type="number" placeholder="Team Score for Hole" class="w-full bg-slate-800 p-4 rounded-2xl text-3xl text-center">
+            <button onclick="saveTeamScore()" class="mt-8 w-full bg-emerald-600 py-6 rounded-3xl text-xl font-bold">Save Team Score</button>
         </div>
 
-        <!-- Other tabs with placeholders for brevity -->
-        <div id="tab1" class="tab-content hidden">Player Management</div>
-        <div id="tab2" class="tab-content hidden">Contacts List</div>
-        <div id="tab3" class="tab-content hidden">Tournament Rules</div>
-        <div id="tab4" class="tab-content hidden">Foursome Mixing Tool</div>
-        <div id="tab5" class="tab-content hidden">Tee Times & Meals</div>
-        <div id="tab6" class="tab-content hidden">Course Layout</div>
-        <div id="tab7" class="tab-content hidden">Payout Distribution ($320/day)</div>
+        <!-- Players -->
+        <div id="tab1" class="tab-content hidden">
+            <h2 class="text-2xl mb-6">Player Management</h2>
+            <input id="newPlayerName" placeholder="New Player Name" class="w-full bg-slate-800 p-4 rounded-2xl mb-4">
+            <button onclick="addPlayer()" class="bg-emerald-600 px-8 py-4 rounded-2xl">Add Player</button>
+            <div id="playerList" class="mt-6 space-y-3"></div>
+        </div>
+
+        <!-- Add similar dynamic content for other tabs -->
+        <div id="tab2" class="tab-content hidden">Player Contacts (phone/email)</div>
+        <div id="tab3" class="tab-content hidden">Tournament Rules (best ball, mulligans, tees, etc.)</div>
+        <div id="tab4" class="tab-content hidden">Random Foursome Mixing for Days 2-4</div>
+        <div id="tab5" class="tab-content hidden">Tee Times & Meals (editable)</div>
+        <div id="tab6" class="tab-content hidden">Course Layout with Hole Details</div>
+        <div id="tab7" class="tab-content hidden">Payouts (1-2-3 + contests)</div>
     </div>
 
     <script>
+        let players = ["Steve Carter", "Player 2", "Player 3", "Player 4"];
+
         function showTab(n) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
             document.getElementById('tab' + n).classList.remove('hidden');
         }
-        showTab(0);
 
-        function saveScore() {
-            alert('Team score saved! ✅');
+        function renderPlayers() {
+            const list = document.getElementById('playerList');
+            list.innerHTML = '';
+            players.forEach((p, i) => {
+                list.innerHTML += `<div class="flex justify-between bg-slate-800 p-4 rounded-2xl"><span>${p}</span><button onclick="deletePlayer(${i})" class="text-red-400">Delete</button></div>`;
+            });
         }
+
+        function addPlayer() {
+            const name = document.getElementById('newPlayerName').value.trim();
+            if (name) {
+                players.push(name);
+                renderPlayers();
+                document.getElementById('newPlayerName').value = '';
+            }
+        }
+
+        function deletePlayer(i) {
+            players.splice(i, 1);
+            renderPlayers();
+        }
+
+        function saveTeamScore() {
+            alert('Team score saved offline! ✅');
+        }
+
+        // Init
+        renderPlayers();
+        showTab(0);
     </script>
 </body>
 </html>
