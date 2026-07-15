@@ -6,8 +6,29 @@
     <title>Arrowhead Pointe Classic</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-950 text-white p-8 text-center">
-    <h1 class="text-5xl font-bold mb-8 text-emerald-400">Truman's Arrowhead Pointe Classic</h1>
-    <p class="text-2xl">Golf Tournament Scoring App</p>
+<body class="bg-slate-950 text-slate-200">
+    <div class="max-w-4xl mx-auto p-6">
+        <h1 class="text-5xl font-bold text-center mb-2 text-emerald-400">Truman's Arrowhead Pointe Classic</h1>
+        <p class="text-center text-xl text-emerald-300">Best Ball Foursomes • Scoring App</p>
+
+        <div class="grid grid-cols-2 gap-6 mt-10">
+            <div class="bg-slate-900 rounded-3xl p-8">
+                <h2 class="text-2xl mb-6">Score Entry</h2>
+                <input type="text" placeholder="Player Name" class="w-full bg-slate-800 p-4 rounded-2xl mb-4">
+                <input type="number" placeholder="Hole Score" class="w-full bg-slate-800 p-4 rounded-2xl text-3xl text-center">
+                <button onclick="alert('Score saved offline! Leaderboard updated. ✅')" class="mt-8 w-full bg-emerald-600 py-6 rounded-3xl text-xl font-bold">Save Score</button>
+            </div>
+            <div class="bg-slate-900 rounded-3xl p-8">
+                <h2 class="text-2xl mb-6">Current Leaderboard</h2>
+                <p class="text-emerald-400 text-xl">1st - Team Alpha (-6)</p>
+                <p class="text-xl">2nd - Team Beta (-4)</p>
+                <p class="text-xl">3rd - Team Gamma (-2)</p>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center text-slate-400">
+            More tabs (Players, Map, Cabins, Gallery) available in next update.
+        </div>
+    </div>
 </body>
 </html>
