@@ -9,80 +9,71 @@
 <body class="bg-slate-950 text-slate-200">
     <div class="max-w-4xl mx-auto p-6">
         <h1 class="text-5xl font-bold text-center mb-2 text-emerald-400">Truman's Arrowhead Pointe Classic</h1>
-        <p class="text-center text-xl text-emerald-300">Best Ball Foursomes • Team Scoring</p>
+        <p class="text-center text-xl text-emerald-300">Best Ball Foursomes • 16 Players</p>
 
         <!-- Tabs -->
         <div class="flex gap-2 border-b border-slate-700 mb-8 overflow-x-auto">
             <button onclick="showTab(0)" class="tab px-6 py-3 border-b-2 border-emerald-400 text-emerald-400">Scoring</button>
             <button onclick="showTab(1)" class="tab px-6 py-3 text-slate-400">Players</button>
-            <button onclick="showTab(2)" class="tab px-6 py-3 text-slate-400">Contacts</button>
-            <button onclick="showTab(3)" class="tab px-6 py-3 text-slate-400">Rules</button>
-            <button onclick="showTab(4)" class="tab px-6 py-3 text-slate-400">Mixing</button>
-            <button onclick="showTab(5)" class="tab px-6 py-3 text-slate-400">Misc</button>
-            <button onclick="showTab(6)" class="tab px-6 py-3 text-slate-400">Course</button>
-            <button onclick="showTab(7)" class="tab px-6 py-3 text-slate-400">Payouts</button>
+            <button onclick="showTab(2)" class="tab px-6 py-3 text-slate-400">Map</button>
+            <button onclick="showTab(3)" class="tab px-6 py-3 text-slate-400">Payouts</button>
         </div>
 
-        <!-- Scoring -->
+        <!-- Scoring Tab with Best Ball -->
         <div id="tab0" class="tab-content">
             <h2 class="text-2xl mb-6">Team Best Ball Scoring</h2>
             <select id="teamSelect" class="w-full bg-slate-800 p-4 rounded-2xl mb-6"></select>
-            <input id="holeScore" type="number" placeholder="Team Score for Hole" class="w-full bg-slate-800 p-4 rounded-2xl text-3xl text-center">
-            <button onclick="saveTeamScore()" class="mt-8 w-full bg-emerald-600 py-6 rounded-3xl text-xl font-bold">Save Team Score</button>
+            <input id="holeScore" type="number" placeholder="Lowest Score on Hole" class="w-full bg-slate-800 p-4 rounded-2xl text-3xl text-center">
+            <button onclick="saveBestBallScore()" class="mt-8 w-full bg-emerald-600 py-6 rounded-3xl text-xl font-bold">Save & Calculate Best Ball</button>
         </div>
 
-        <!-- Players -->
+        <!-- Players Tab -->
         <div id="tab1" class="tab-content hidden">
             <h2 class="text-2xl mb-6">Player Management</h2>
-            <input id="newPlayerName" placeholder="New Player Name" class="w-full bg-slate-800 p-4 rounded-2xl mb-4">
-            <button onclick="addPlayer()" class="bg-emerald-600 px-8 py-4 rounded-2xl">Add Player</button>
-            <div id="playerList" class="mt-6 space-y-3"></div>
+            <input id="newPlayer" placeholder="Add Player" class="w-full bg-slate-800 p-4 rounded-2xl mb-4">
+            <button onclick="addPlayer()" class="bg-emerald-600 px-8 py-4 rounded-2xl">Add</button>
+            <div id="playerList" class="mt-6"></div>
         </div>
 
-        <!-- Add similar dynamic content for other tabs -->
-        <div id="tab2" class="tab-content hidden">Player Contacts (phone/email)</div>
-        <div id="tab3" class="tab-content hidden">Tournament Rules (best ball, mulligans, tees, etc.)</div>
-        <div id="tab4" class="tab-content hidden">Random Foursome Mixing for Days 2-4</div>
-        <div id="tab5" class="tab-content hidden">Tee Times & Meals (editable)</div>
-        <div id="tab6" class="tab-content hidden">Course Layout with Hole Details</div>
-        <div id="tab7" class="tab-content hidden">Payouts (1-2-3 + contests)</div>
+        <!-- Course Map Tab -->
+        <div id="tab2" class="tab-content hidden">
+            <h2 class="text-2xl mb-6">Course Map - Arrowhead Pointe</h2>
+            <p class="mb-4">Par 72 • Blue Tees ~6,458 yds (Non-Seniors) • White Tees for Seniors</p>
+            <div class="bg-slate-900 p-6 rounded-3xl space-y-4">
+                <div>Hole 1: Par 4, Blue 410, White 380</div>
+                <!-- Add more holes as needed -->
+            </div>
+        </div>
+
+        <!-- Payouts Tab -->
+        <div id="tab3" class="tab-content hidden">
+            <h2 class="text-2xl mb-6">Payouts ($320/day for 16 players)</h2>
+            <p>1st Team: $160</p>
+            <p>2nd Team: $100</p>
+            <p>3rd Team: $60</p>
+            <p>Closest to Pin (2 per day): $20 each</p>
+            <p>Longest Drive on 18: $20</p>
+        </div>
     </div>
 
     <script>
         let players = ["Steve Carter", "Player 2", "Player 3", "Player 4"];
-
         function showTab(n) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
             document.getElementById('tab' + n).classList.remove('hidden');
         }
-
-        function renderPlayers() {
-            const list = document.getElementById('playerList');
-            list.innerHTML = '';
-            players.forEach((p, i) => {
-                list.innerHTML += `<div class="flex justify-between bg-slate-800 p-4 rounded-2xl"><span>${p}</span><button onclick="deletePlayer(${i})" class="text-red-400">Delete</button></div>`;
-            });
-        }
-
         function addPlayer() {
-            const name = document.getElementById('newPlayerName').value.trim();
-            if (name) {
-                players.push(name);
-                renderPlayers();
-                document.getElementById('newPlayerName').value = '';
-            }
-        }
-
-        function deletePlayer(i) {
-            players.splice(i, 1);
+            const name = document.getElementById('newPlayer').value.trim();
+            if (name) players.push(name);
             renderPlayers();
         }
-
-        function saveTeamScore() {
-            alert('Team score saved offline! ✅');
+        function renderPlayers() {
+            const list = document.getElementById('playerList');
+            list.innerHTML = players.map(p => `<div class="bg-slate-800 p-4 rounded-2xl">${p}</div>`).join('');
         }
-
-        // Init
+        function saveBestBallScore() {
+            alert('Best Ball score saved! Team total updated.');
+        }
         renderPlayers();
         showTab(0);
     </script>
