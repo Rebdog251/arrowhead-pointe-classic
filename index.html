@@ -19,16 +19,15 @@
 
         <div id="tab0" class="tab-content">
             <h2>Team Scoring</h2>
-            <!-- Add your scoring form here -->
+            <p>Best Ball - Enter team score per hole</p>
         </div>
 
         <div id="tab2" class="tab-content hidden">
             <h2>Course Map</h2>
             <select onchange="showHole(this.value)" class="w-full p-4 bg-slate-800 rounded-2xl">
-                <option value="1">Hole 1 - Par 4</option>
-                <option value="18">Hole 18</option>
+                <option value="1">Hole 1 - Par 4 - 410 yds</option>
+                <option value="18">Hole 18 - Longest Drive</option>
             </select>
-            <div id="holeDetails"></div>
         </div>
     </div>
 
@@ -38,7 +37,7 @@
             document.getElementById('tab' + n).classList.remove('hidden');
         }
         function showHole(hole) {
-            document.getElementById('holeDetails').innerHTML = `<p>Hole ${hole} details loaded.</p>`;
+            alert(`Hole ${hole} selected`);
         }
         showTab(0);
     </script>
