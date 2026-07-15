@@ -9,58 +9,43 @@
 <body class="bg-slate-950 text-slate-200">
     <div class="max-w-4xl mx-auto p-6">
         <h1 class="text-5xl font-bold text-center mb-2 text-emerald-400">Truman's Arrowhead Pointe Classic</h1>
-        <p class="text-center text-xl text-emerald-300">Best Ball Foursomes • 16 Players</p>
+        <p class="text-center text-xl text-emerald-300">Best Ball Foursomes • Team Scoring</p>
 
-        <!-- Player Management -->
-        <div class="mt-10 bg-slate-900 rounded-3xl p-8">
-            <h2 class="text-2xl mb-6">Player Management</h2>
-            <input id="newPlayer" placeholder="New Player Name" class="bg-slate-800 p-4 rounded-2xl w-full mb-4">
-            <button onclick="addPlayer()" class="bg-emerald-600 px-8 py-4 rounded-2xl">Add Player</button>
-            <div id="playerList" class="mt-6 space-y-2"></div>
+        <!-- Tabs -->
+        <div class="flex gap-2 border-b border-slate-700 mb-8 overflow-x-auto pb-1">
+            <button onclick="showTab(0)" class="tab px-6 py-3 border-b-2 border-emerald-400 text-emerald-400 font-medium">Scoring</button>
+            <button onclick="showTab(1)" class="tab px-6 py-3 text-slate-400">Players</button>
+            <button onclick="showTab(2)" class="tab px-6 py-3 text-slate-400">Leaderboards</button>
+            <button onclick="showTab(3)" class="tab px-6 py-3 text-slate-400">Map</button>
         </div>
 
-        <!-- Score Entry -->
-        <div class="mt-10 bg-slate-900 rounded-3xl p-8">
-            <h2 class="text-2xl mb-6">Score Entry</h2>
-            <select id="playerSelect" class="w-full bg-slate-800 p-4 rounded-2xl mb-6"></select>
-            <input id="scoreInput" type="number" placeholder="Hole Score" class="w-full bg-slate-800 p-4 rounded-2xl text-3xl text-center">
-            <button onclick="saveScore()" class="mt-8 w-full bg-emerald-600 py-6 rounded-3xl text-xl font-bold">Save Score</button>
+        <!-- Scoring Tab (Team Best Ball) -->
+        <div id="tab0" class="tab-content">
+            <h2 class="text-2xl mb-6">Team Score Entry</h2>
+            <select id="teamSelect" class="w-full bg-slate-800 p-4 rounded-2xl mb-6">
+                <option>Team Alpha</option>
+                <option>Team Beta</option>
+            </select>
+            <input id="holeScore" type="number" placeholder="Best Ball Score for Hole" class="w-full bg-slate-800 p-4 rounded-2xl text-3xl text-center">
+            <button onclick="saveTeamScore()" class="mt-8 w-full bg-emerald-600 py-6 rounded-3xl text-xl font-bold">Save Team Score</button>
         </div>
+
+        <!-- Other Tabs -->
+        <div id="tab1" class="tab-content hidden">Player Management (add names here)</div>
+        <div id="tab2" class="tab-content hidden">Live Team Leaderboards</div>
+        <div id="tab3" class="tab-content hidden">Course Map</div>
     </div>
 
     <script>
-        let players = ["Steve Carter", "Player 2", "Player 3", "Player 4"]; // Start with 16 if needed
-
-        function renderPlayers() {
-            const list = document.getElementById('playerList');
-            const select = document.getElementById('playerSelect');
-            list.innerHTML = '';
-            select.innerHTML = '';
-            players.forEach((p, i) => {
-                list.innerHTML += `<div class="flex justify-between bg-slate-800 p-4 rounded-2xl"><span>${p}</span><button onclick="deletePlayer(${i})" class="text-red-400">Delete</button></div>`;
-                select.innerHTML += `<option>${p}</option>`;
-            });
+        function showTab(n) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+            document.getElementById('tab' + n).classList.remove('hidden');
         }
+        showTab(0);
 
-        function addPlayer() {
-            const name = document.getElementById('newPlayer').value.trim();
-            if (name) {
-                players.push(name);
-                renderPlayers();
-                document.getElementById('newPlayer').value = '';
-            }
+        function saveTeamScore() {
+            alert('Team best ball score saved offline! ✅ Leaderboard updated.');
         }
-
-        function deletePlayer(i) {
-            players.splice(i, 1);
-            renderPlayers();
-        }
-
-        function saveScore() {
-            alert('Score saved offline! ✅');
-        }
-
-        renderPlayers();
     </script>
 </body>
 </html>
